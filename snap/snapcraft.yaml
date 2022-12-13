@@ -80,3 +80,98 @@ apps:
     command: usr/local/bin/spatialite
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  convert:
+    command: usr/local/bin/spatialite_convert
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  dem:
+    command: usr/local/bin/spatialite_dem
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  dxf:
+    command: usr/local/bin/spatialite_dxf
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  gml:
+    command: usr/local/bin/spatialite_gml
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  network:
+    command: usr/local/bin/spatialite_network
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  osm_filter:
+    command: usr/local/bin/spatialite_osm_filter
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  osm_map:
+    command: usr/local/bin/spatialite_osm_map
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  osm_net:
+    command: usr/local/bin/spatialite_osm_net
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  osm_overpass:
+    command: usr/local/bin/spatialite_osm_overpass
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  osm_raw:
+    command: usr/local/bin/spatialite_osm_raw
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  tool:
+    command: usr/local/bin/spatialite_tool
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  xml_collapse:
+    command: usr/local/bin/spatialite_xml_collapse
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  xml_load:
+    command: usr/local/bin/spatialite_xml_load
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  xml_print:
+    command: usr/local/bin/spatialite_xml_print
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  xml_validator:
+    command: usr/local/bin/spatialite_xml_validator
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  xml2utf8:
+    command: usr/local/bin/spatialite_xml2utf8
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  exif_loader:
+    command: usr/local/bin/exif_loader
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  shp_doctor:
+    command: usr/local/bin/shp_doctor
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
+
+  shp_sanitize:
+    command: usr/local/bin/shp_sanitize
+    environment:
+      "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
