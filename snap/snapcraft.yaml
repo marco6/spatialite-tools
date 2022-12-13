@@ -27,6 +27,11 @@ parts:
     plugin: autotools
     source-type: tar
     source: https://www.gaia-gis.it/gaia-sins/libspatialite-$SNAPCRAFT_PROJECT_VERSION.tar.gz
+    override-build: |
+      ./configure
+      make -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
+      make install-strip DESTDIR="${SNAPCRAFT_PART_INSTALL}"
+
     build-packages:
       - gcc
       - make
@@ -56,24 +61,30 @@ parts:
       snapcraftctl pull
       patch Makefile.am $SNAPCRAFT_PROJECT_DIR/spatialite-tools.patch
     override-build: |
-      aclocal && automake
-      snapcraftctl build
+      aclocal
+      automake
+      ./configure
+      make -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
+      make install-strip DESTDIR="${SNAPCRAFT_PART_INSTALL}"
     build-environment:
       - PKG_CONFIG_PATH: $SNAPCRAFT_STAGE/usr/local/lib/pkgconfig/
-    after:
-      - libspatialite
-    build-packages:
-      - gcc
-      - make
-      - libexpat1-dev
-      - libreadosm-dev
-      - libxml2-dev
-    stage-packages:
-      - libexpat1
-      - libreadosm1
-      - libxml2
-      - libfreexl1
-      - libproj15
+    after: [libspatialite]
+
+  cleanup:
+    after: [spatialite-tools]
+    plugin: nil
+    override-prime: |
+      set -eux
+      rm -rf \
+        usr/local/include \
+        usr/share/doc \
+        usr/local/lib/pkgconfig
+
+      # Remove sqlite loadable modules
+      find . -type f,l -name mod_\* -exec rm \{} \;
+
+      # Remove all static libraries
+      find . -type f,l \( -name \*.a -or -name \*.la \) -exec rm \{} \;
 
 apps:
   spatialite:
@@ -106,27 +117,27 @@ apps:
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  osm_filter:
+  osm-filter:
     command: usr/local/bin/spatialite_osm_filter
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  osm_map:
+  osm-map:
     command: usr/local/bin/spatialite_osm_map
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  osm_net:
+  osm-net:
     command: usr/local/bin/spatialite_osm_net
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  osm_overpass:
+  osm-overpass:
     command: usr/local/bin/spatialite_osm_overpass
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  osm_raw:
+  osm-raw:
     command: usr/local/bin/spatialite_osm_raw
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
@@ -136,22 +147,22 @@ apps:
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  xml_collapse:
+  xml-collapse:
     command: usr/local/bin/spatialite_xml_collapse
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  xml_load:
+  xml-load:
     command: usr/local/bin/spatialite_xml_load
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  xml_print:
+  xml-print:
     command: usr/local/bin/spatialite_xml_print
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  xml_validator:
+  xml-validator:
     command: usr/local/bin/spatialite_xml_validator
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
@@ -161,17 +172,17 @@ apps:
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  exif_loader:
+  exif-loader:
     command: usr/local/bin/exif_loader
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  shp_doctor:
+  shp-doctor:
     command: usr/local/bin/shp_doctor
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
-  shp_sanitize:
+  shp-sanitize:
     command: usr/local/bin/shp_sanitize
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
