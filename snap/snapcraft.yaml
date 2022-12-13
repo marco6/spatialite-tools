@@ -20,7 +20,7 @@ description: |
 base: core20
 
 grade: devel
-confinement: devmode # use 'strict' once you have the right plugs and slots
+confinement: strict
 
 parts:
   libspatialite:
@@ -89,100 +89,140 @@ parts:
 apps:
   spatialite:
     command: usr/local/bin/spatialite
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   convert:
     command: usr/local/bin/spatialite_convert
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   dem:
     command: usr/local/bin/spatialite_dem
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   dxf:
     command: usr/local/bin/spatialite_dxf
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   gml:
     command: usr/local/bin/spatialite_gml
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   network:
     command: usr/local/bin/spatialite_network
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   osm-filter:
     command: usr/local/bin/spatialite_osm_filter
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   osm-map:
     command: usr/local/bin/spatialite_osm_map
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   osm-net:
     command: usr/local/bin/spatialite_osm_net
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   osm-overpass:
     command: usr/local/bin/spatialite_osm_overpass
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   osm-raw:
     command: usr/local/bin/spatialite_osm_raw
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   tool:
     command: usr/local/bin/spatialite_tool
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   xml-collapse:
     command: usr/local/bin/spatialite_xml_collapse
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   xml-load:
     command: usr/local/bin/spatialite_xml_load
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   xml-print:
     command: usr/local/bin/spatialite_xml_print
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   xml-validator:
     command: usr/local/bin/spatialite_xml_validator
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   xml2utf8:
     command: usr/local/bin/spatialite_xml2utf8
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   exif-loader:
     command: usr/local/bin/exif_loader
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   shp-doctor:
     command: usr/local/bin/shp_doctor
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
 
   shp-sanitize:
     command: usr/local/bin/shp_sanitize
+    plugs:
+      - home
     environment:
       "LD_LIBRARY_PATH": "$SNAP/usr/local/lib"
