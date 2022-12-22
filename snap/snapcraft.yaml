@@ -71,7 +71,7 @@ parts:
     after: [libspatialite]
 
   cleanup:
-    after: [spatialite-tools]
+    after: [spatialite-tools, libspatialite]
     plugin: nil
     override-prime: |
       set -eux
@@ -85,6 +85,9 @@ parts:
 
       # Remove all static libraries
       find . -type f,l \( -name \*.a -or -name \*.la \) -exec rm \{} \;
+
+      # Remove empty folders
+      find . -empty -type d -delete
 
 apps:
   spatialite:
