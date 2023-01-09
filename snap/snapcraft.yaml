@@ -56,6 +56,11 @@ parts:
       - -**/*.a
       - -**/*.la
       - -**/mod_*
+      - -**/libexpatw*
+      - -**/libicui18n*
+      - -**/libicuio*
+      - -**/libicutest*
+      - -**/libicutu*
       - -usr/local/include
       - -usr/share/doc
       - -usr/local/lib/pkgconfig
