@@ -1,4 +1,4 @@
-name: spatialite # you probably want to 'snapcraft register <name>'
+name: spatialite
 version: '5.0.1'
 summary: 'spatialite-tools is a collection of CLI tools supporting SpatiaLite'
 description: |
@@ -52,6 +52,14 @@ parts:
       - libminizip1
       - libfreexl1
       - libproj15
+    prime:
+      - -**/*.a
+      - -**/*.la
+      - -**/mod_*
+      - -usr/local/include
+      - -usr/share/doc
+      - -usr/local/lib/pkgconfig
+      - -usr/share/lintian
 
   spatialite-tools:
     plugin: autotools
@@ -75,19 +83,9 @@ parts:
     plugin: nil
     override-prime: |
       set -eux
-      rm -rf \
-        usr/local/include \
-        usr/share/doc \
-        usr/local/lib/pkgconfig
-
-      # Remove sqlite loadable modules
-      find . -type f,l -name mod_\* -exec rm \{} \;
-
-      # Remove all static libraries
-      find . -type f,l \( -name \*.a -or -name \*.la \) -exec rm \{} \;
 
       # Remove empty folders
-      find . -empty -type d -delete
+      find . -depth -empty -type d -delete
 
 apps:
   spatialite:
